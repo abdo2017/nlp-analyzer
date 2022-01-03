@@ -16,16 +16,14 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.static('dist'))
 
+
 const baseURL = 'https://api.meaningcloud.com/sentiment-2.1?'
 const apiKey = process.env.API_KEY
 
 
-
-let userInput = []
-
 app.get('/', function (req, res) {
-    // res.sendFile('dist/index.html')
-    res.sendFile(path.resolve('src/client/views/index.html'))
+    res.sendFile('dist/index.html')
+    // res.sendFile(path.resolve('src/client/views/index.html'))
 })
 
 app.get('/test', function (req, res) {
@@ -37,13 +35,8 @@ app.post('/api', async function(req, res) {
 
     const apiURL = `${baseURL}key=${apiKey}&url=${userInput}&lang=en`
     const response = await fetch(apiURL)
-    try {
-        const meaningcloudOutput = await response.json()
-        res.send(meaningcloudOutput)
-    }catch (error) {
-        console.log("error", error)
-    }
-
+    const meaningcloudOutput = await response.json()
+    res.send(meaningcloudOutput)
 })
 
 

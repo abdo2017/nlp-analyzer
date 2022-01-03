@@ -3,21 +3,21 @@ import {checkForURL} from "./urlChecker";
 const handleSubmit  = async (event) => {
     event.preventDefault()
 
-    // check what text was put into the form field
     let formText = document.getElementById('url').value
 
     if (checkForURL(formText)) {
         const headersRequest = {
             method: 'POST',
             credentials: 'same-origin',
+            mode:'cors',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({formText})
+            body: JSON.stringify({url:formText})
         };
 
         const res = await fetch("http://localhost:8081/api", headersRequest)
-            .then(async response => (await response.json()))
+        const response = await res.json()
             .then(res => {
                 document.getElementById('model').innerHTML = 'Model: ' + res.model;
                 document.getElementById("agreement").innerHTML = `Agreement: ${res.agreement}`;
