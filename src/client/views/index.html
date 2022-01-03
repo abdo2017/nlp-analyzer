@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>NLP Analyzer</title>
+    </head>
+<body>
+    <header>
+        <h1>NLP analyzer</h1>
+    </header>
+
+    <main>
+        <p>Enter a URL of an article / a blog to discover its sentiment.</p>
+        <section>
+            <form onsubmit="function _(e) { e.preventDefault() }">
+                <input id="url" type="text" name="input" value="" placeholder="Enter URL here">
+                <button type="submit" class="btn-submit">Submit</button>
+            </form>
+        </section>
+
+        <section>
+            <strong>Form Results:</strong>
+            <div id="model"></div>
+            <div id="agreement"></div>
+            <div id="subjectivity"></div>
+            <div id="confidence"></div>
+            <div id="irony"></div>
+        </section>
+    </main>
+
+
+    <script>
+        // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+            // Use the window load event to keep the page load performant
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js');
+            });
+        }
+    </script>
+</body>
+</html>
